@@ -1,0 +1,10 @@
+// Creación del proyecto Laravel 10
+curl -s https://laravel.build/pos-system-api | bash
+
+// Descargamos Jetstream:
+sail composer require laravel/jetstream --dev
+
+// Instalación de dependencias NPM y migración de la Base de Datos
+npm install
+npm run build
+php artisan migrate
