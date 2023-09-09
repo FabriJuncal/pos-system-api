@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
 
 /**
  * Controlador para el manejo de autenticación y usuarios.
@@ -94,5 +95,30 @@ class AuthController extends Controller
             'status' => true,
             'message' => 'Usuario ha cerrado sesión exitosamente',
         ], 200);
+    }
+
+    public function me()
+    {
+        // $user = Auth::user(); // Obtén el usuario autenticado actualmente
+        $user = auth()->user();
+
+        if ($user) {
+            return response()->json($user);
+        } else {
+            return response()->json(['message' => 'No hay usuario autenticado'], 401);
+        }
+    }
+
+    public function sendResetLink(Request $request)
+    {
+        $request->validate(['email' => 'required|email']);
+
+        $status = Password::sendResetLink(
+            $request->only('email')
+        );
+
+        return $status === Password::RESET_LINK_SENT
+            ? response()->json(['message' => "Le hemos enviado un correo electrónico el enlace para restablecer su contraseña."])
+            : response()->json(['message' => "Ha ocurrido un error."], 400);
     }
 }

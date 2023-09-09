@@ -18,7 +18,8 @@ use Illuminate\Support\Facades\Route;
 // En esta instancia recien se obtendrá el API TOKEN para poder acceder a las rutas protegidas por Sanctum.
 Route::post('auth/register',[AuthController::class, 'create']);
 Route::post('auth/login',[AuthController::class, 'login']);
+Route::post('auth/forgot-password',[AuthController::class, 'sendResetLink']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware(['auth:sanctum'])->group(function(){
+    Route::get('auth/me', [AuthController::class, 'me']);
 });
