@@ -8,3 +8,11 @@ sail composer require laravel/jetstream --dev
 npm install
 npm run build
 php artisan migrate
+
+// Creación de Migraciones
+sail php artisan make:migration create_company_categories_table
+sail php artisan make:migration create_social_networks
+sail php artisan make:migration create_companies_table
+sail php artisan make:migration create_company_social_networks
+sail php artisan make:migration create_local_table
+sail php artisan make:migration create_nums_phones_table
