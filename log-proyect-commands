@@ -16,3 +16,6 @@ sail php artisan make:migration create_companies_table
 sail php artisan make:migration create_company_social_networks
 sail php artisan make:migration create_local_table
 sail php artisan make:migration create_nums_phones_table
+
+// Creación de controlador para la subida de imagenes
+sail php artisan make:controller ImagenController
